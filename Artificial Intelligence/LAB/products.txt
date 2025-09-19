@@ -1,0 +1,30 @@
+Product: Jade Shalwar Kameez
+Colors:
+- Dark Green
+- Sand
+- Dark Blue
+- Rust
+- Coconut Brown
+- Olive
+- Charcoal
+- Light Blue
+- Grey
+- Light Brown
+- Brown
+- Teal
+- Blue
+- Light Grey
+- Ash Grey
+- SLATE
+- Slate Grey
+- Dark Grey
+- Indigo
+- Teal Green
+- Turqouise
+- Mocha
+- Lavender
+- Mehndi Green
+- Maroon
+- Chocolate Brown
+- Dark Brown
+- Light  Blue

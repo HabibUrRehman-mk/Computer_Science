@@ -1,0 +1,148 @@
+https://zellbury.com/products/legacy-wash-wear-legacy-2425
+https://zellbury.com/products/wash-wear-supreme-pc
+https://zellbury.com/products/imperial-wash-wear-suit
+https://zellbury.com/products/wash-wear-boski-pc
+https://zellbury.com/products/merino-wool-wash-wear-suit-merino-2425
+https://zellbury.com/products/marvel-shalwar-kameez
+https://zellbury.com/products/wash-wear-shalwar-kameez-jade
+https://zellbury.com/products/express-shalwar-kameez-mske
+https://zellbury.com/products/slub-elite-wash-wear-suit
+https://zellbury.com/products/wash-wear-infinity-pc
+
+
+
+
+
+Database Design
+1. User & Roles Management
+
+Employees
+(employee_id, first_name, last_name, email, phone, address, hire_date, status)
+
+Roles
+(role_id, role_name, description)
+
+Accounts
+(account_id, employee_id, username, password_hash, role_id, is_active, last_login)
+
+2. Customers & Suppliers
+
+Customers
+(customer_id, name, phone, email, address, city, type [retail/contract])
+
+Suppliers
+(supplier_id, name, contact_person, phone, email, address, payment_terms)
+
+
+3. Inventory & Raw Materials
+
+MaterialTypes
+(type_id, type_name [Aluminium, Glass, Screw, Glue, Rubber, Tools])
+
+RawMaterials
+(material_id, name, type_id, unit, size, thickness, colour, current_stock, reorder_level, supplier_id)
+
+InventoryTransactions
+(transaction_id, material_id, qty, transaction_type [in/out], date, linked_task_id, purchase_invoice_id)
+
+ToolsMachines
+(tool_id, name, type, status [available/in use/maintenance], purchase_date, last_service_date)
+
+
+4. Sales & Quotations
+
+Quotations
+(quotation_id, customer_id, created_by, date, status [pending/approved/rejected], total_price, notes)
+
+QuotationItems
+(item_id, quotation_id, material_id, description, qty, unit_price, total)
+
+SalesOrders
+(order_id, quotation_id, customer_id, created_by, order_date, status [in-progress/completed/cancelled])
+
+OrderItems
+(order_item_id, order_id, material_id, description, qty, unit_price, total)
+
+
+5. Production Workflow
+
+ProductionStages
+(stage_id, name [Measurement, Cutting, Colouring, Assembly, QC, Delivery, Installation], description)
+
+ProductionTasks
+(task_id, order_id, stage_id, assigned_to, supervisor_id, status [assigned/completed/pending], start_date, end_date, remarks)
+
+TaskLogs
+(log_id, task_id, action_by, action_type [assigned, started, completed], date_time, comments)
+
+
+6. Delivery & Installation
+
+Delivery
+(delivery_id, order_id, driver_id, vehicle_no, scheduled_date, actual_date, status, remarks)
+
+Installation
+(install_id, order_id, team_lead_id, scheduled_date, actual_date, status, remarks)
+
+
+7. Billing & Accounting
+
+Invoices
+(invoice_id, order_id, customer_id, issue_date, due_date, total_amount, status [paid/unpaid/partial])
+
+InvoiceItems
+(invoice_item_id, invoice_id, material_id, description, qty, unit_price, total)
+
+PurchaseInvoices
+(purchase_invoice_id, supplier_id, date, total_amount, status [paid/unpaid])
+
+PurchaseInvoiceItems
+(purchase_item_id, purchase_invoice_id, material_id, qty, unit_price, total)
+
+Payments
+(payment_id, invoice_id, amount, method [cash/bank/cheque/online], date, received_by)
+
+Expenses
+(expense_id, category, description, amount, date, added_by)
+
+
+🔹 Database Workflow (How Data Flows)
+Step 1: Quotation → Sales Order
+
+Sales staff creates Quotation → Customer accepts → Becomes SalesOrder.
+
+OrderItems reserved from RawMaterials stock.
+
+Step 2: Production Workflow
+
+Supervisor assigns ProductionTasks (Cutting, Colouring, Assembly, etc.).
+
+Workers update status → logged in TaskLogs.
+
+Materials consumed → recorded in InventoryTransactions.
+
+Step 3: Delivery & Installation
+
+Once order is complete → linked to DeliveryInstallation.
+
+Team assigned, delivery scheduled, customer signs off.
+
+Step 4: Billing & Accounting
+
+System generates Invoice from SalesOrder.
+
+Customer pays → recorded in Payments.
+
+Raw materials purchased → recorded in PurchaseInvoices & PurchaseInvoiceItems.
+
+Expenses (transport, labour) logged in Expenses.
+
+Step 5: Reporting & Decision Making
+
+InventoryTransactions + Invoices = Profitability reports.
+
+ProductionTasks + TaskLogs = Employee performance.
+
+Customers + SalesOrders = Sales trends.
+
+Suppliers + PurchaseInvoices = Supplier performance.
