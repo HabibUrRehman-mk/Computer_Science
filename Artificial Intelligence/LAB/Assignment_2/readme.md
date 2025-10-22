@@ -4,9 +4,7 @@ This is a **Streamlit-based Image Processing and Object Detection web app** that
 
 ---
 
-## 📂 Project Structure
-Image processing and Car Detection/
-│
+#Image processing and Car Detection/
 ├── app.py # Main Streamlit web app
 ├── models/
 │ └── best.pt # Trained YOLO model for vehicle detection
@@ -88,7 +86,6 @@ The YOLO model used (`models/best.pt`) was trained using the scripts inside the 
 ```bash
 # 1. Clone the project
 git clone https://github.com/HabibUrRehman-mk/Computer_Science/tree/main/Artificial%20Intelligence/LAB/Assignment_2
-cd vehicle-detection-app
 
 # 2. Install dependencies
 pip install -r requirements.txt
