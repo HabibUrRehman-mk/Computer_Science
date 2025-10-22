@@ -1,0 +1,7 @@
+python 3.8+ (3.10.11 used)
+streamlit
+ultralytics
+opencv-python
+pillow
+numpy
+requests
